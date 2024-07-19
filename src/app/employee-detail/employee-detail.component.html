@@ -1,0 +1,21 @@
+@if({employee}){
+  <div class="container">
+    <h2>Employee Details</h2>
+    <div>
+      <label>ID:</label> {{ employee?._id }}
+    </div>
+    <div>
+      <label>Name:</label> {{ employee?.name }}
+    </div>
+    <div>
+      <label>Position:</label> {{ employee?.position }}
+    </div>
+    <div>
+      <label>Department:</label> {{ employee?.department }}
+    </div>
+    <div>
+      <label>Salary:</label> {{ employee?.salary }}
+    </div>
+    <button (click)="goBack()" class="btn btn-primary">Back</button>
+  </div>
+}
