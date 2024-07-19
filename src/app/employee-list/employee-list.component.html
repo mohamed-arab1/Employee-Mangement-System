@@ -1,6 +1,6 @@
 <div class="container">
   <h2>Employee List</h2>
-  <button (click)="goToForm()">Add Employee</button>
+  <button (click)="goToForm()" class="btn btn-primary">Add Employee</button>
   <table class="table table-striped">
     <thead>
       <tr>
@@ -13,20 +13,20 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        @for (employee of employees; track $index) {
+      @for (employee of employees; track $index) {
+        <tr>
           <td>{{ employee._id }}</td>
           <td>{{ employee.name }}</td>
           <td>{{ employee.position }}</td>
           <td>{{ employee.department }}</td>
           <td>{{ employee.salary }}</td>
           <td>
-            <button (click)="viewEmployee(employee._id)" class="btn btn-primary">View</button>
-            <button (click)="editEmployee(employee._id)" class="btn btn-secondary">Edit</button>
-            <button (click)="deleteEmployee(employee._id)" class="btn btn-danger">Delete</button>
+            <button (click)="viewEmployee(employee._id)" class="btn btn-primary me-2">View</button>
+            <button (click)="editEmployee(employee._id)" class="btn btn-secondary me-2">Edit</button>
+            <button (click)="deleteEmployee(employee._id)" class="btn btn-danger me-2">Delete</button>
           </td>
+        </tr>
         }
-      </tr>
     </tbody>
   </table>
 </div>

@@ -1,15 +1,13 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Employee } from '../model/employee.model';
 import { EmployeeService } from '../services/employee.service';
-import { FormsModule, FormBuilder, FormGroup, Validators, ReactiveFormsModule   } from '@angular/forms';
-
-
+import { Employee } from '../model/employee.model';
+import { FormsModule, FormBuilder, FormGroup, Validators, ReactiveFormsModule  } from '@angular/forms';
 @Component({
   selector: 'app-employee-form',
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule],
-  templateUrl: './employee-form.component.html',
+templateUrl: './employee-form.component.html',
   styleUrls: ['./employee-form.component.css']
 })
 export class EmployeeFormComponent implements OnInit {
@@ -27,7 +25,7 @@ export class EmployeeFormComponent implements OnInit {
       name: ['', Validators.required],
       position: ['', Validators.required],
       department: ['', Validators.required],
-      salary: ['', [Validators.required, Validators.min(3)]]
+      salary: ['', [Validators.required, Validators.min(0)]]
     });
   }
 
@@ -43,13 +41,19 @@ export class EmployeeFormComponent implements OnInit {
     }
   }
 
+
   onSubmit(): void {
-    if (this.isEditMode) {
-      this.employeeService.updateEmployee(this.employee._id, this.employee).subscribe(() => {
+    if (this.employeeForm.invalid) {
+      return;
+    }
+
+    const employee: Employee = this.employeeForm.value;
+    if (this.isEditMode && this.employee._id) {
+      this.employeeService.updateEmployee(this.employee._id, employee).subscribe(() => {
         this.router.navigate(['/employees']);
       });
     } else {
-      this.employeeService.createEmployee(this.employee).subscribe(() => {
+      this.employeeService.createEmployee(employee).subscribe(() => {
         this.router.navigate(['/employees']);
       });
     }
